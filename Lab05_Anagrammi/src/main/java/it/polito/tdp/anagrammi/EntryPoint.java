@@ -1,7 +1,11 @@
 package it.polito.tdp.anagrammi;
 
 import javafx.application.Application;
+
 import static javafx.application.Application.launch;
+
+import it.polito.tdp.anagrammi.FXMLController;
+import it.polito.tdp.anagrammi.model.Model;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,17 +14,24 @@ import javafx.stage.Stage;
 
 public class EntryPoint extends Application {
 
-    @Override
+	@Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
         
+    	FXMLController controller;
+    	
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Scene.fxml"));
+        Parent root = loader.load();
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
+
+        controller = loader.getController();
+    	
+        Model modello = new Model();
+        controller.setModel(modello);
         
-        stage.setTitle("JavaFX and Maven");
+        stage.setTitle("Anagrammando in allegria!");
         stage.setScene(scene);
         stage.show();
-    }
+	}
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
